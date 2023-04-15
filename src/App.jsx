@@ -12,6 +12,7 @@ function App() {
     const fetchData = async () => {
       const response = await fetch('https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json');
       const data = await response.json();
+      console.log(data)
       setPokemonList(data.pokemon);
     };
     fetchData();
@@ -42,8 +43,8 @@ function App() {
   const filteredPokemon = pokemonList.filter(pokemon =>
     (pokemon.name.toLowerCase().includes(searchQuery) ||
      pokemon.num.includes(searchQuery)) &&
-    (filterTypes.length === 0 || filterTypes.some(type => pokemon.type.includes(type))) &&
-    (filterWeaknesses.length === 0 || filterWeaknesses.some(weakness => pokemon.weaknesses.includes(weakness)))
+    ((filterTypes.length === 0 || filterTypes.some(type => pokemon.type.includes(type)))) &&
+    ((filterWeaknesses.length === 0 || filterWeaknesses.some(weakness => pokemon.weaknesses.includes(weakness))))
   );
 
   return (
@@ -52,7 +53,7 @@ function App() {
       <div className="filters">
         <label>
           Search by name or number:
-          <input type="text" value={searchQuery} onChange={handleSearch} />
+          <input type="text" placeholder="enter a number" value={searchQuery} onChange={handleSearch} />
         </label>
         <label>
           Filter by type:
@@ -75,6 +76,7 @@ function App() {
         {filteredPokemon.map(pokemon => (
           <li key={pokemon.num}>
             <h2>{pokemon.name} ({pokemon.num})</h2>
+            <img src={pokemon.img} alt={pokemon.num} />
             <p>Type: {pokemon.type.join(', ')}</p>
             <p>Weaknesses: {pokemon.weaknesses.join(', ')}</p>
             </li>
