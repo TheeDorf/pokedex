@@ -106,11 +106,7 @@ function App() {
   let filteredPokemon = test(searchQuery, filterTypes, filterWeaknesses);
   console.log(filteredPokemon);
 
-  // (pokemon.name.toLowerCase().includes(searchQuery) ||
-  //  pokemon.num.includes(searchQuery)) &&
-  // ((pokemon.some(creature => creature.type.includes(filterTypes)))) &&
-  // ((pokemon.some(creature => creature.weaknesses.includes(filterWeaknesses))))
-
+ 
   return (
     <div className="App">
       <h1>Pokemon Pokedex</h1>
