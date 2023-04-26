@@ -15,6 +15,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 30px;
+  align-items: center;
 
 }
 
