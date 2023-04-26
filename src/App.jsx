@@ -79,30 +79,39 @@ function App() {
     console.log(searchQuery, filterTypes, filterWeaknesses);
     if (searchQuery && filterTypes && filterWeaknesses) {
       let value = pokemonList.filter((pokemon) => {
-        return pokemon.name.includes(searchQuery) || pokemon.num.includes(searchQuery) && pokemon.type.includes(filterTypes) && pokemon.weaknesses.includes(filterWeaknesses)
+        return pokemon.name.toLowerCase().startsWith(searchQuery) && pokemon.type.includes(filterTypes) && pokemon.weaknesses.includes(filterWeaknesses)
       });
       return value;
-    }
-    else if (filterTypes && filterWeaknesses) {
+    } else if (searchQuery && filterTypes) {
       let value = pokemonList.filter((pokemon) => {
-        return pokemon.type.includes(filterTypes) && pokemon.weaknesses.includes(filterWeaknesses)
-      });
-      return value;
-    }
-    else if (filterTypes || filterWeaknesses) {
-      let value = pokemonList.filter((pokemon) => {
-        return pokemon.type.includes(filterTypes) || pokemon.weaknesses.includes(filterWeaknesses)
+        return pokemon.name.toLowerCase().startsWith(searchQuery) && pokemon.type.includes(filterTypes)
       });
       return value;
     } else if (searchQuery) {
       let value = pokemonList.filter((pokemon) => {
-        return pokemon.name.toLowerCase().startsWith(searchQuery) || pokemon.num.startsWith(searchQuery)
+        return pokemon.name.toLowerCase().startsWith(searchQuery)
       });
       return value;
-    }else {
+    } else if (filterTypes && filterWeaknesses) {
+      let value = pokemonList.filter((pokemon) => {
+        return pokemon.type.includes(filterTypes) && pokemon.weaknesses.includes(filterWeaknesses)
+      });
+      return value;
+    } else if (filterTypes) {
+      let value = pokemonList.filter((pokemon) => {
+        return pokemon.type.includes(filterTypes)
+      });
+      return value;
+    } else if (filterWeaknesses) {
+      let value = pokemonList.filter((pokemon) => {
+        return pokemon.weaknesses.includes(filterWeaknesses)
+      });
+      return value;
+    } else {
       return pokemonList;
     }
   };
+  
   let filteredPokemon = test(searchQuery, filterTypes, filterWeaknesses);
   console.log(filteredPokemon);
 
